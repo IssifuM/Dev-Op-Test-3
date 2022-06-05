@@ -42,8 +42,13 @@ resource "aws_iam_policy" "EC2-policy" {
 EOF
 }
 
+data "aws_iam_policy" "ReadOnlyAccess" {
+  arn = "arn:aws:iam::471188201673:policy/test-policy"
+}
+
 # Attaching the policy to the role
-resource "aws_iam_role_policy_attachment" "test-attach" {
+
+resource "aws_iam_role_policy_attachment" "sto-readonly-role-policy-attach" {
   role       = aws_iam_role.EC2-role.name
-  policy_arn = aws_iam_policy.EC2-policy.arn
+  policy_arn = data.aws_iam_policy.ReadOnlyAccess.arn
 }
