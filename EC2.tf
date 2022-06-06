@@ -18,6 +18,7 @@ resource "aws_instance" "Test-server2" {
 
   ami                         = var.ami
   instance_type               = var.type
+  iam_instance_profile        = aws_iam_instance_profile.ec2_profile.name
   key_name                    = "SisterMAariama"
   associate_public_ip_address = true
   availability_zone           = var.az2
